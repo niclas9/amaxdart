@@ -7,11 +7,10 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  http: ^0.13.4
-  json_annotation: ^4.3.0
+  http: ^0.13.0
+  json_annotation: ^4.0.1
   pointycastle: ^3.3.5
   amaxdart_ecc: ^0.4.4
-#  path: ^1.4.1
 
 dev_dependencies:
   test: ^1.19.2
