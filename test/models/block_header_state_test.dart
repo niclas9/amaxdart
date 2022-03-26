@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 
-import 'package:eosdart/eosdart.dart';
+import 'package:amaxdart/amaxdart.dart';
 import 'package:test/test.dart';
 
 void main() {

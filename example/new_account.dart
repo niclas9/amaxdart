@@ -1,7 +1,7 @@
-import 'package:eosdart/eosdart.dart';
+import 'package:amaxdart/amaxdart.dart';
 
 main() {
-  EOSClient client = EOSClient('https://jungle3.cryptolions.io', 'v1',
+  AMAXClient client = AMAXClient('http://127.0.0.1:8888', 'v1',
       privateKeys: ["5J9b3xMkbvcT6gYv2EpQ8FD4ZBjgypuNKwE1jxkd7Wd1DYzhk88"]);
 
   //privateKeys can also be set after client was constructed, as following
@@ -20,7 +20,7 @@ main() {
       'threshold': 1,
       'keys': [
         {
-          'key': "EOS65xaKR6zw4cjy9kuwuCbi7vTTbWNYSHdVgNf7492VAjCPi6gT6",
+          'key': "AM65xaKR6zw4cjy9kuwuCbi7vTTbWNYSHdVgNf7492VAjCPi6gT6",
           'weight': 1,
         }
       ],
@@ -31,7 +31,7 @@ main() {
       'threshold': 1,
       'keys': [
         {
-          'key': "EOS65xaKR6zw4cjy9kuwuCbi7vTTbWNYSHdVgNf7492VAjCPi6gT6",
+          'key': "AM65xaKR6zw4cjy9kuwuCbi7vTTbWNYSHdVgNf7492VAjCPi6gT6",
           'weight': 1,
         }
       ],
@@ -42,28 +42,28 @@ main() {
 
   List<Action> actions = [
     Action()
-      ..account = 'eosio'
+      ..account = 'amax'
       ..name = 'newaccount'
       ..authorization = auth
       ..data = data,
     Action()
-      ..account = 'eosio'
+      ..account = 'amax'
       ..name = 'buyram'
       ..authorization = auth
       ..data = {
         'payer': "xuelongqy2cn",
         'receiver': "xuelongqy3cn",
-        'quant': "2.0000 EOS",
+        'quant': "2.0000 AMAX",
       },
     Action()
-      ..account = 'eosio'
+      ..account = 'amax'
       ..name = 'delegatebw'
       ..authorization = auth
       ..data = {
         'from': "xuelongqy2cn",
         'receiver': "xuelongqy3cn",
-        'stake_net_quantity': "1.0000 EOS",
-        'stake_cpu_quantity': "1.0000 EOS",
+        'stake_net_quantity': "1.0000 AMAX",
+        'stake_cpu_quantity': "1.0000 AMAX",
         'transfer': false,
       }
   ];

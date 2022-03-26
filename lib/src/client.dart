@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:eosdart_ecc/eosdart_ecc.dart' as ecc;
+import 'package:amaxdart_ecc/amaxdart_ecc.dart' as ecc;
 import 'package:http/http.dart' as http;
 
 import './models/abi.dart';
@@ -14,24 +14,24 @@ import './models/block_header_state.dart';
 import './models/node_info.dart';
 import './models/primary_wrapper.dart';
 import './models/transaction.dart';
-import 'eosdart_base.dart';
+import 'amaxdart_base.dart';
 import 'jsons.dart';
 import 'serialize.dart' as ser;
 
-/// EOSClient calls APIs against given EOS nodes
-class EOSClient {
+/// AMAXClient calls APIs against given AMAX nodes
+class AMAXClient {
   final String _nodeURL;
   final String _version;
   late int expirationInSec;
   late int httpTimeout;
-  Map<String, ecc.EOSPrivateKey> keys = Map();
+  Map<String, ecc.AMAXPrivateKey> keys = Map();
 
   /// Converts abi files between binary and structured form (`abi.abi.json`) */
   late Map<String, Type> abiTypes;
   late Map<String, Type> transactionTypes;
 
-  /// Construct the EOS client from eos node URL
-  EOSClient(
+  /// Construct the AMAX client from AMAX node URL
+  AMAXClient(
     this._nodeURL,
     this._version, {
     this.expirationInSec = 180,
@@ -49,8 +49,8 @@ class EOSClient {
   /// Sets private keys. Required to sign transactions.
   void _mapKeys(List<String> privateKeys) {
     for (String privateKey in privateKeys) {
-      ecc.EOSPrivateKey pKey = ecc.EOSPrivateKey.fromString(privateKey);
-      String publicKey = pKey.toEOSPublicKey().toString();
+      ecc.AMAXPrivateKey pKey = ecc.AMAXPrivateKey.fromString(privateKey);
+      String publicKey = pKey.toAMAXPublicKey().toString();
       keys[publicKey] = pKey;
     }
   }
@@ -73,7 +73,7 @@ class EOSClient {
     return completer.future;
   }
 
-  /// Get EOS Node Info
+  /// Get AMAX Node Info
   Future<NodeInfo> getInfo() async {
     return this._post('/chain/get_info', {}).then((nodeInfo) {
       NodeInfo info = NodeInfo.fromJson(nodeInfo);
@@ -81,7 +81,7 @@ class EOSClient {
     });
   }
 
-  /// Get table rows (eosio get table ...)
+  /// Get table rows (AMAX get table ...)
   Future<List<Map<String, dynamic>>> getTableRows(
     String code,
     String scope,
@@ -114,7 +114,7 @@ class EOSClient {
     return [];
   }
 
-  /// Get table row (eosio get table ...)
+  /// Get table row (AMAX get table ...)
   Future<Map<String, dynamic>?> getTableRow(
     String code,
     String scope,
@@ -144,7 +144,7 @@ class EOSClient {
     return rows.length > 0 ? rows[0] : null;
   }
 
-  /// Get EOS Block Info
+  /// Get AMAX Block Info
   Future<Block> getBlock(String blockNumOrId) async {
     return this._post(
         '/chain/get_block', {'block_num_or_id': blockNumOrId}).then((block) {
@@ -152,7 +152,7 @@ class EOSClient {
     });
   }
 
-  /// Get EOS Block Header State
+  /// Get AMAX Block Header State
   Future<BlockHeaderState> getBlockHeaderState(String blockNumOrId) async {
     return this._post('/chain/get_block_header_state',
         {'block_num_or_id': blockNumOrId}).then((block) {
@@ -160,7 +160,7 @@ class EOSClient {
     });
   }
 
-  /// Get EOS abi from account name
+  /// Get AMAX abi from account name
   Future<AbiResp> getAbi(String accountName) async {
     return this
         ._post('/chain/get_abi', {'account_name': accountName}).then((abi) {
@@ -168,7 +168,7 @@ class EOSClient {
     });
   }
 
-  /// Get EOS raw abi from account name
+  /// Get AMAX raw abi from account name
   Future<AbiResp> getRawAbi(String accountName) async {
     return this
         ._post('/chain/get_raw_abi', {'account_name': accountName}).then((abi) {
@@ -176,7 +176,7 @@ class EOSClient {
     });
   }
 
-  /// Get EOS raw code and abi from account name
+  /// Get AMAX raw code and abi from account name
   Future<AbiResp> getRawCodeAndAbi(String accountName) async {
     return this._post('/chain/get_raw_code_and_abi',
         {'account_name': accountName}).then((abi) {
@@ -184,7 +184,7 @@ class EOSClient {
     });
   }
 
-  /// Get EOS account info form the given account name
+  /// Get AMAX account info form the given account name
   Future<Account> getAccount(String accountName) async {
     return this._post('/chain/get_account', {'account_name': accountName}).then(
         (account) {
@@ -192,7 +192,7 @@ class EOSClient {
     });
   }
 
-  /// Get EOS account info form the given account name
+  /// Get AMAX account info form the given account name
   Future<List<Holding>> getCurrencyBalance(String code, String account,
       [String? symbol]) async {
     return this._post('/chain/get_currency_balance',
@@ -201,7 +201,7 @@ class EOSClient {
     });
   }
 
-  /// Get required key by transaction from EOS blockchain
+  /// Get required key by transaction from AMAX blockchain
   Future<RequiredKeys> getRequiredKeys(
       Transaction transaction, List<String> availableKeys) async {
     NodeInfo info = await getInfo();
@@ -220,7 +220,7 @@ class EOSClient {
     });
   }
 
-  /// Get EOS account actions
+  /// Get AMAX account actions
   Future<Actions> getActions(String accountName,
       {int pos = -1, int offset = -1}) async {
     return this._post('/history/get_actions', {
@@ -232,7 +232,7 @@ class EOSClient {
     });
   }
 
-  /// Get EOS transaction
+  /// Get AMAX transaction
   Future<TransactionBlock> getTransaction(String id,
       {int? blockNumHint}) async {
     return this._post('/history/get_transaction',
@@ -249,7 +249,7 @@ class EOSClient {
     });
   }
 
-  /// Push transaction to EOS chain
+  /// Push transaction to AMAX chain
   Future<dynamic> pushTransaction(Transaction transaction,
       {bool broadcast = true,
       bool sign = true,
@@ -353,7 +353,7 @@ class EOSClient {
         ..addAll(Uint8List(32)));
 
       for (String publicKey in requiredKeys.requiredKeys!) {
-        ecc.EOSPrivateKey pKey = this.keys[publicKey]!;
+        ecc.AMAXPrivateKey pKey = this.keys[publicKey]!;
         signatures.add(pKey.sign(signBuf).toString());
       }
     }

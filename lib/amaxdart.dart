@@ -16,5 +16,5 @@ export 'src/models/abi.dart';
 
 export 'src/numeric.dart';
 export 'src/serialize.dart';
-export 'src/eosdart_base.dart';
+export 'src/amaxdart_base.dart';
 export 'src/models/transaction.dart';

@@ -4,7 +4,7 @@ import './conversion_helper.dart';
 
 part 'account.g.dart';
 
-/// Represents EOS account information
+/// Represents AMAX account information
 @JsonSerializable()
 class Account with ConversionHelper {
   @JsonKey(name: 'account_name')
@@ -95,7 +95,7 @@ class Limit with ConversionHelper {
 
 // this is not using json serializer as it is customized serializer to
 // convert the amount currency split by space
-/// Structure for the JSON string format e.g. '1.0000 EOS', it splits that by
+/// Structure for the JSON string format e.g. '1.0000 AMAX', it splits that by
 /// 'amount' and 'currency'
 class Holding {
   double? amount;

@@ -1,6 +1,6 @@
 String abiJson = '''
 {
-    "version": "eosio::abi/1.1",
+    "version": "amax::abi/1.1",
     "structs": [
         {
             "name": "extensions_entry",
@@ -468,7 +468,7 @@ String abiJson = '''
 
 String transactionJson = '''
 {
-    "version": "eosio::abi/1.0",
+    "version": "amax::abi/1.0",
     "types": [
         {
             "new_type_name": "account_name",

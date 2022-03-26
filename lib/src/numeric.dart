@@ -259,8 +259,8 @@ String keyToString(IKey key, String suffix, String prefix) {
 
 /// Convert key in `s` to binary form
 IKey stringToPublicKey(String s) {
-  if (s.substring(0, 3) == 'EOS') {
-    var whole = base58ToBinary(publicKeyDataSize + 4, s.substring(3));
+  if (s.substring(0, 2) == 'AM') {
+    var whole = base58ToBinary(publicKeyDataSize + 4, s.substring(2));
     var key = IKey(KeyType.k1, new Uint8List(publicKeyDataSize));
     for (var i = 0; i < publicKeyDataSize; ++i) {
       key.data[i] = whole[i];
@@ -294,16 +294,16 @@ publicKeyToString(IKey key) {
   }
 }
 
-/// If a key is in the legacy format (`EOS` prefix), then convert it to the new format (`PUB_K1_`).
+/// If a key is in the legacy format (`AM` prefix), then convert it to the new format (`PUB_K1_`).
 /// Leaves other formats untouched
 String convertLegacyPublicKey(String s) {
-  if (s.substring(0, 3) == 'EOS') {
+  if (s.substring(0, 2) == 'AM') {
     return publicKeyToString(stringToPublicKey(s));
   }
   return s;
 }
 
-/// If a key is in the legacy format (`EOS` prefix), then convert it to the new format (`PUB_K1_`).
+/// If a key is in the legacy format (`AM` prefix), then convert it to the new format (`PUB_K1_`).
 /// Leaves other formats untouched
 List<String> convertLegacyPublicKeys(List<String> keys) =>
     keys.map((item) => convertLegacyPublicKey(item)).toList();

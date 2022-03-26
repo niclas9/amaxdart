@@ -1,7 +1,7 @@
-import 'package:eosdart/eosdart.dart';
+import 'package:amaxdart/amaxdart.dart';
 
 main() {
-  EOSClient client = EOSClient('http://127.0.0.1:8888', 'v1',
+  AMAXClient client = AMAXClient('http://127.0.0.1:8888', 'v1',
       privateKeys: ["5J9b3xMkbvcT6gYv2EpQ8FD4ZBjgypuNKwE1jxkd7Wd1DYzhk88"]);
 
   //privateKeys can also be set after client was constructed, as following
@@ -22,7 +22,7 @@ main() {
 
   List<Action> actions = [
     Action()
-      ..account = 'eosio.token'
+      ..account = 'amax.token'
       ..name = 'transfer'
       ..authorization = auth
       ..data = data

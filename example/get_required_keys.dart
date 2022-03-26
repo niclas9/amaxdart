@@ -1,7 +1,7 @@
-import 'package:eosdart/eosdart.dart';
+import 'package:amaxdart/amaxdart.dart';
 
 main() {
-  EOSClient client = EOSClient('http://127.0.0.1:8888', 'v1');
+  AMAXClient client = AMAXClient('http://127.0.0.1:8888', 'v1');
 
   List<Authorization> auth = [
     Authorization()
@@ -31,12 +31,12 @@ main() {
 
   List<Action> actions = [
     Action()
-      ..account = 'eosio.token'
+      ..account = 'amax.token'
       ..name = 'transfer'
       ..authorization = auth
       ..data = data,
     Action()
-      ..account = 'eosio.token'
+      ..account = 'amax.token'
       ..name = 'transfer'
       ..authorization = auth2
       ..data = data2
@@ -45,8 +45,8 @@ main() {
   Transaction transaction = Transaction()..actions = actions;
 
   List<String> availableKeys = [
-    "EOS8Qi58kbERkTJC7A4gabxYU4SbrAxStJHacoke4sf6AvJyEDZXj",
-    "EOS5hF6jM5otV3jYdLVWqQ2Lidpb7LtN8dsXsFHFocggzvfGHGfR1"
+    "AM8Qi58kbERkTJC7A4gabxYU4SbrAxStJHacoke4sf6AvJyEDZXj",
+    "AM5hF6jM5otV3jYdLVWqQ2Lidpb7LtN8dsXsFHFocggzvfGHGfR1"
   ];
   client.getRequiredKeys(transaction, availableKeys).then((RequiredKeys rkeys) {
     print(rkeys);

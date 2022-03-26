@@ -1,12 +1,12 @@
-import 'package:eosdart/eosdart.dart';
+import 'package:amaxdart/amaxdart.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('EOS Client', () {
-    late EOSClient client;
+  group('AMAX Client', () {
+    late AMAXClient client;
 
     setUp(() {
-      client = EOSClient('https://eos.greymass.com', 'v1');
+      client = AMAXClient('https://eos.greymass.com', 'v1');
     });
 
     test('Get Info', () {
@@ -16,25 +16,25 @@ void main() {
     });
 
     test('Get Abi', () {
-      client.getAbi('eosio.token').then((AbiResp abi) {
-        expect(abi.accountName, equals('eosio.token'));
+      client.getAbi('amax.token').then((AbiResp abi) {
+        expect(abi.accountName, equals('amax.token'));
       });
     });
 
     test('Get Raw Abi', () {
-      client.getRawAbi('eosio.token').then((AbiResp abi) {
-        expect(abi.accountName, equals('eosio.token'));
+      client.getRawAbi('amax.token').then((AbiResp abi) {
+        expect(abi.accountName, equals('amax.token'));
         expect(abi.codeHash,
-            '01bd013c4f8be142b9cadf511f007c6ac201c068d529f01ed5661803c575befa');
+            '86cab526bb39224b6e06a012a5d45e90cf4d3117203e66d5bd5668db45741c75');
         expect(abi.abiHash,
-            'f8f677996a8ca68388bc41cf55e727949c161b624a47e497e3b2f71a0e635dad');
+            '601365afd8a39d1d55caea0589ca3a14215918b7056690cda9d737f24810c685');
         expect(abi.abi, isNotNull);
       });
     });
 
     test('Get Raw code and Abi', () {
-      client.getRawCodeAndAbi('eosio.token').then((AbiResp abi) {
-        expect(abi.accountName, equals('eosio.token'));
+      client.getRawCodeAndAbi('amax.token').then((AbiResp abi) {
+        expect(abi.accountName, equals('amax.token'));
         expect(abi.wasm!.length > 0, isTrue);
         expect(abi.abi, isNotNull);
       });
@@ -52,8 +52,8 @@ void main() {
     });
 
     test('Get Account', () {
-      client.getAccount('eosio.stake').then((Account account) {
-        expect(account.accountName, equals('eosio.stake'));
+      client.getAccount('amax.stake').then((Account account) {
+        expect(account.accountName, equals('amax.stake'));
         expect(account.coreLiquidBalance!.amount! > 0, isTrue);
       });
     });

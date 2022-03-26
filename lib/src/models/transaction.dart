@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import './action.dart';
 import './conversion_helper.dart';
-import '../eosdart_base.dart';
+import '../amaxdart_base.dart';
 import '../serialize.dart' as ser;
 
 part 'transaction.g.dart';
