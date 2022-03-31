@@ -6,7 +6,7 @@ void main() {
     late AMAXClient client;
 
     setUp(() {
-      client = AMAXClient('https://eos.greymass.com', 'v1');
+      client = AMAXClient('https://1127.0.0.1:8888', 'v1');
     });
 
     test('Get Info', () {

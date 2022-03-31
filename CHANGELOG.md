@@ -1,3 +1,7 @@
+## 0.4.8+20220331
+
+- Support amax
+
 ## 0.4.8
 
 - Migrates to null safety

@@ -5,7 +5,7 @@ import 'package:amaxdart/amaxdart.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('EOS Model', () {
+  group('AMAX Model', () {
     late String accountStr;
 
     setUp(() {
@@ -24,7 +24,7 @@ void main() {
       expect(account.lastCodeUpdate, DateTime(1970, 1, 1));
       expect(account.created, DateTime(2018, 11, 14, 6, 58));
       expect(account.coreLiquidBalance!.amount, 49254569.1575);
-      expect(account.coreLiquidBalance!.currency, 'EOS');
+      expect(account.coreLiquidBalance!.currency, 'AMAX');
       expect(account.ramQuota, 20683);
       expect(account.netWeight, 1000500);
       expect(account.cpuWeight, 1001500);
@@ -39,11 +39,11 @@ void main() {
       expect(account.permissions![0].requiredAuth!.keys, isList);
       expect(account.permissions![0].requiredAuth!.keys!.length, 1);
       expect(account.permissions![0].requiredAuth!.keys![0].key,
-          'EOS5GZ7R4BsApfxKcSbHeBEeFavsu9b75ooXM6pf5fo5G4ZbSWBMX');
+          'AM5GZ7R4BsApfxKcSbHeBEeFavsu9b75ooXM6pf5fo5G4ZbSWBMX');
       expect(account.permissions![0].requiredAuth!.keys![0].weight, 1);
       expect(account.totalResources!.owner, 'binancecold1');
       expect(account.totalResources!.netWeight!.amount, 100.05);
-      expect(account.totalResources!.netWeight!.currency, 'EOS');
+      expect(account.totalResources!.netWeight!.currency, 'AMAX');
       expect(account.selfDelegatedBandwidth!.from, 'binancecold1');
       expect(account.selfDelegatedBandwidth!.cpuWeight!.amount, 100.0);
       expect(account.refundRequest!.owner, 'binancecold1');

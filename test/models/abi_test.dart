@@ -5,7 +5,7 @@ import 'package:amaxdart/amaxdart.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('EOS Model', () {
+  group('AMAX Model', () {
     late String abiStr;
 
     setUp(() {
@@ -16,7 +16,7 @@ void main() {
       Map<String, dynamic> nodeInfoJson = json.decode(abiStr);
       AbiResp abi = AbiResp.fromJson(nodeInfoJson);
 
-      expect(abi.accountName, 'eosio.token');
+      expect(abi.accountName, 'amax.token');
       expect(abi.codeHash,
           '01bd013c4f8be142b9cadf511f007c6ac201c068d529f01ed5661803c575befa');
       expect(abi.abiHash,
