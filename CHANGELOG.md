@@ -1,3 +1,7 @@
+## 0.4.8+20220406
+
+- Handler http error
+
 ## 0.4.8+20220331
 
 - Support amax
