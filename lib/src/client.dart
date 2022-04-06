@@ -64,12 +64,15 @@ class AMAXClient {
             body: json.encode(body))
         .timeout(Duration(seconds: this.httpTimeout))
         .then((http.Response response) {
-      if (response.statusCode >= 300) {
-        completer.completeError(response.body);
-      } else {
-        completer.complete(json.decode(response.body));
-      }
-    });
+          if (response.statusCode >= 300) {
+            completer.completeError(response.body);
+          } else {
+            completer.complete(json.decode(response.body));
+          }
+        })
+        .catchError((error, stackTrace) {
+          completer.completeError(error.toString());
+        });
     return completer.future;
   }
 
