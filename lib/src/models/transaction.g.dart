@@ -68,11 +68,11 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction()
   ..expiration = json['expiration'] == null
       ? null
       : DateTime.parse(json['expiration'] as String)
-  ..refBlockNum = json['ref_block_num'] as int?
-  ..refBlockPrefix = json['ref_block_prefix'] as int?
-  ..maxNetUsageWords = json['max_net_usage_words'] as int?
-  ..maxCpuUsageMs = json['max_cpu_usage_ms'] as int?
-  ..delaySec = json['delay_sec'] as int?
+  ..refBlockNum = json['ref_block_num'] ?? 0 as int?
+  ..refBlockPrefix = json['ref_block_prefix'] ?? 0 as int?
+  ..maxNetUsageWords = json['max_net_usage_words'] ?? 0 as int?
+  ..maxCpuUsageMs = json['max_cpu_usage_ms'] ?? 0 as int?
+  ..delaySec = json['delay_sec'] ?? 0 as int?
   ..contextFreeActions = (json['context_free_actions'] as List<dynamic>?)
       ?.map((e) => e as Object)
       .toList()

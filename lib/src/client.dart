@@ -207,16 +207,13 @@ class AMAXClient {
   /// Get required key by transaction from AMAX blockchain
   Future<RequiredKeys> getRequiredKeys(
       Transaction transaction, List<String> availableKeys) async {
-    NodeInfo info = await getInfo();
-    Block refBlock = await getBlock((info.headBlockNum).toString());
-    Transaction trx = await _fullFill(transaction, refBlock);
-    trx = await _serializeActions(trx);
+    transaction = await _serializeActions(transaction);
 
     // raw abi to json
 //      AbiResp abiResp = await getRawAbi(account);
 //    print(abiResp.abi);
     return this._post('/chain/get_required_keys', {
-      'transaction': trx,
+      'transaction': transaction,
       'available_keys': availableKeys
     }).then((requiredKeys) {
       return RequiredKeys.fromJson(requiredKeys);
@@ -257,14 +254,17 @@ class AMAXClient {
       {bool broadcast = true,
       bool sign = true,
       int blocksBehind = 3,
-      int expireSecond = 180}) async {
+      int expireSecond = 180,
+      bool autoFill = true}) async {
     NodeInfo info = await this.getInfo();
-    Block refBlock =
-        await getBlock((info.headBlockNum! - blocksBehind).toString());
 
-    Transaction trx = await _fullFill(transaction, refBlock);
+    if(autoFill) {
+      Block refBlock = await getBlock((info.headBlockNum! - blocksBehind).toString());
+      transaction = await _fullFill(transaction, refBlock);
+    }
+
     PushTransactionArgs pushTransactionArgs = await _pushTransactionArgs(
-        info.chainId!, transactionTypes['transaction']!, trx, sign);
+        info.chainId!, transactionTypes['transaction']!, transaction, sign);
 
     if (broadcast) {
       return this._post('/chain/push_transaction', {
@@ -306,12 +306,12 @@ class AMAXClient {
   /// serialize actions in a transaction
   Future<Transaction> _serializeActions(Transaction transaction) async {
     for (Action action in transaction.actions!) {
-      String account = action.account!;
-
-      Contract contract = await _getContract(account);
-
-      action.data =
-          _serializeActionData(contract, account, action.name!, action.data!);
+      if(action.data is Map) {
+        String account = action.account!;
+        Contract contract = await _getContract(account);
+        action.data =
+            _serializeActionData(contract, account, action.name!, action.data!);
+      }
     }
     return transaction;
   }
