@@ -1,3 +1,9 @@
+## 0.4.8+20220418
+
+- Fix transaction from json default value is null
+- Only serialize action date with map
+- Add auto fill arg & remove duplicate auto fill
+
 ## 0.4.8+20220406
 
 - Handler http error
